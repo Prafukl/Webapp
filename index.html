@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            color: #1a1a1a;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #8e44ad;
+            margin: 15px auto 0;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .primary-btn {
+            background-color: #8e44ad;
+            color: white;
+        }
+
+        .primary-btn:hover {
+            background-color: #6c3483;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(142, 68, 173, 0.3);
+        }
+
+        .secondary-btn {
+            background-color: transparent;
+            color: #8e44ad;
+            border: 2px solid #8e44ad;
+            margin-left: 15px;
+        }
+
+        .secondary-btn:hover {
+            background-color: #8e44ad;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(142, 68, 173, 0.3);
+        }
+
+        .small-btn {
+            padding: 8px 18px;
+            font-size: 0.9rem;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: #1e1e2f;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #8e44ad;
+        }
+        
+        /* Skills section styles */
+        #skills {
+            background-color: #fff;
+            padding: 80px 0;
+        }
+        
+        .skills-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-top: -30px;
+            margin-bottom: 50px;
+            color: #666;
+            letter-spacing: 1px;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 30px;
+        }
+        
+        .skill-card {
+            display: flex;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            overflow: hidden;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .skill-icon {
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .skill-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .skill-content p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        /* Timeline styles for Education and Experience sections */
+        #education, #experience {
+            background-color: #f9f9f9;
+            padding: 80px 0;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #09c;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            left: 0;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: white;
+            border: 4px solid #09c;
+            top: 20px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            position: relative;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .timeline-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .timeline-content h4 {
+            font-size: 1.1rem;
+            color: #09c;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-date {
+            font-size: 0.9rem;
+            color: #777;
+            font-style: italic;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-content p {
+            margin-top: 15px;
+            color: #666;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+                left: 0 !important;
+            }
+            
+            .timeline-item::after {
+                left: 21px;
+                right: auto;
+            }
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: #fff;
+            padding: 120px 0 80px;
+            border-bottom: 1px solid #e6e9ec;
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            color: #2c3e50;
+        }
+
+        .hero-text h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #34495e;
+            font-weight: 500;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: #7f8c8d;
+            max-width: 500px;
+        }
+
+        .highlight {
+            color: #3498db;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 4px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border: 5px solid #fff;
+        }
+
+        /* Companies/Brands Section */
+        #companies {
+            background-color: #fff;
+            padding: 60px 0;
+        }
+
+        .marquee {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+        .marquee-content {
+            display: flex;
+            animation: scroll 25s linear infinite;
+            width: fit-content;
+        }
+
+        .brand-logo {
+            flex: 0 0 auto;
+            margin: 0 30px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .brand-logo:hover {
+            opacity: 1;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Projects Section */
+        #projects {
+            background-color: #f9f9f9;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .project-card:hover .project-img img {
+            transform: scale(1.1);
+        }
+
+        .project-info {
+            padding: 25px;
+        }
+
+        .project-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .project-info p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .project-tags span {
+            background-color: #f0f0f0;
+            color: #555;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding-top: 60px;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .footer-info p {
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: #09c;
+        }
+
+        .footer-links {
+            display: flex;
+            flex: 1;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .footer-section {
+            min-width: 150px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-section h3:after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 3px;
+            background-color: #09c;
+            margin-top: 10px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #09c;
+        }
+
+        .copyright {
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 992px) {
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text p {
+                margin: 0 auto 30px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .burger {
+                display: block;
+            }
+            
+            .nav-links {
+                position: absolute;
+                right: 0;
+                height: calc(100vh - 80px);
+                top: 80px;
+                background-color: #333;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 50%;
+                transform: translateX(100%);
+                transition: transform 0.5s ease-in;
+                padding-top: 20px;
+            }
+            
+            .nav-links li {
+                margin: 20px 0;
+            }
+            
+            .nav-active {
+                transform: translateX(0%);
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .hero {
+                padding: 80px 0 60px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-text h2 {
+                font-size: 1.5rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Portfolio</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#startup">Startup</a></li>
+                    <li><a href="./Loginpage/login.html">login
+                    
+                    </a></li>
+                </ul>
+                <div class="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <script>
+        // JavaScript for toggle menu
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.nav-links');
+        
+        burger.addEventListener('click', () => {
+            nav.classList.toggle('nav-active');
+        });
+    </script>
+
+    <!-- Hero Section with Intro and Photo -->
+    <section id="home" class="hero">
+        <div class="container hero-container">
+            <div class="hero-text">
+                <h1>Hi, I'm <span class="highlight">Prafull</span></h1>
+                <h2>IT Infrastructure, DevOps, SRE, Security, and Cloud</h2>
+                <p>"Empowering Seamless IT Solutions with Infrastructure, Security, and Cloud Expertise."</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn primary-btn">View My Work</a>
+                    <a href="#contact" class="btn secondary-btn">Contact Me</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="./asset/Prafullimage.jpeg" alt="Profile Photo">
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+        
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Bachelor in Computer Application</h3>
+                        <h4>Pune University</h4>
+                        <h4><a href="https://en.wikipedia.org/wiki/Savitribai_Phule_Pune_University">76 Years of Education History</a></h4>
+                        <h4><a href="http://www.unipune.ac.in/">Visit where I studied</a> </h4>
+                        <span class="timeline-date">(2015-2019)</span>
+                        <p>Comprehensive education in Computer science fundamentals, Programming languages, Database management,Networking, web technologies, Cloud , Data Structures
+                            Algorithms </p>
+                        <p> Course Subjects Taken</p>
+                        <p>     
+                                <li>Data Structures </li>
+                                <li>Algorithms</li>
+                                <li>Computer Programming</li>
+                                <li>Computer Architecture</li>
+                                <li>Discrete Mathematics</li>
+                                <li>Software Engineering</li>
+                                <li>Operating Systems</li>
+                                <li>Computer Networks</li>
+                                <li>Database Management Systems</li>
+                                <li>Web Technologies</li>
+                                <li>Cloud Computing</li>
+                                <li>Data Mining </li>
+                                <li>Data Warehousing</li>
+                                <li>Operating Systems</li>
+                                 <li>Cloud Computing </li>
+                                <li>Cyber Security</li>
+
+                            
+  
+                             </p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Master in  Computer Science & Engineering & Application</h3>
+                        <h4>Bharati Vidyapeeth University Pune </h4>
+                        <h4><a href="https://www.bvuniversity.edu.in/">Visit Where I have studied </a></h4>
+                        <span class="timeline-date">(2021-2023)</span>
+                        <p>Strong foundation in computer science principles, software engineering methodologies, and technology infrastructure management , Agile methodologies </p>
+                        <p> Course Subjects Taken</p>
+                        <p>     
+                                <li>Data Structures </li>
+                                <li>Algorithms</li>
+                                <li>Computer Programming</li>
+                                <li>Computer Architecture</li>
+                                <li>Applied Mathematics</li>
+                                <li>Software Engineering</li>
+                                <li> Advance Operating Systems</li>
+                                <li>Computer Networks / Firewall, Switchs</li>
+                                <li>Database Management Systems</li>
+                                <li>Web Technologies</li>
+                                <li>Cloud Computing</li>
+                                <li>Machine Learning </li>
+                                 <li>Cloud Computing </li>
+                                <li>Cyber Security</li>
+                                <li>Information Security</li>
+                                <li>IAM </li>
+                                <li>Data Engineering</li>
+
+                             </p>
+                    
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Experience 5 + </h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>IT Infrastructure</h3>
+                        <h4> <a href="https://smartrent.com/">SmartRent</a></h4>
+
+                        <h4> <a href="https://smartrent.com/">Company Service Type - Product</a></h4>
+                        <span class="timeline-date">(10.2024 - Present)</span>
+                        <p><li>Infrastructure Engineer | Reported to Chief Technology(CTO)Office</li></p>
+                        <p><li>Solely hired as the only Infrastructure Engineer for India, responsible for scaling infrastructure from 0 to 40%.</li></p>
+                        </p>
+
+
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Founding Member and CEO</h3>
+                        <h4><a href="https://www.systemconsultant.io/">Systems Consultant Tech </a></h4>
+                        <h4><a href="https://www.systemconsultant.io/">Company Service Type - Product & Service </a></h4>
+                    
+                        <h4><a href="https://www.systemconsultant.io/">Read my Startup Story 👈 </a></h4>
+                        <span class="timeline-date">(05/2024 - 08/2025)</span>
+                        <p> <li>Provided technical consulting services for enterprise systems</li> 
+                            <li>Focusing on data integration</li> 
+                            <li>system optimization, and technology implementation.</li></p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Service Desk Engineering</h3>
+                        <h4><a href="https://www.compucom.com/">CompuCom  </a></h4>
+                        <h4><a href="https://www.compucom.com/">Company Service Type - Product & Service </a></h4>
+                        <span class="timeline-date">(11/2021 - 04/2024)</span>
+                        <p><li>Transformative IT Solutions to Unlock Business Potential</li></p>
+                    </div>
+                </div>
+                
+            
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Analyst</h3>
+                        <h4><a href="https://eclerx.com/">eclerx  </a></h4>
+                        <h4><a href="https://eclerx.com/">Company Service Type - Financial technology </a></h4>
+                        <span class="timeline-date">(05/2019 - 07/2019)</span>
+                        <p><li>Financial technology that uses cutting-edge innovations in applications, services, and processes to expand, enhance, automate, and scale the delivery of financial products and services</li></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+   <!-- Skills Section -->
+<section id="skills">
+    <div class="container">
+        <h2 class="section-title">Skills</h2>
+        <h3 class="skills-subtitle">PROFESSIONAL DATA-BENDER!</h3>
+        
+        <div class="skills-grid">
+            <!-- Software Engineering (Changed from Machine Learning) -->
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <img src="./asset/laptop.png" alt="Software Engineering Icon"style="width: 60px; height: 60px; object-fit: contain;">
+                </div>
+                <div class="skill-content">
+                    <h3>Software Engineering</h3>
+                    <p>I can design and develop robust software solutions using best practices and modern development methodologies. My expertise includes full-stack development, microservices architecture, and writing clean, maintainable code across multiple programming languages.</p>
+                </div>
+            </div>
+            
+            <!-- Information Technology (Changed from Data Analysis) -->
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <img src="./asset/information-technology.png" alt="Information Technology Icon"style="width: 60px; height: 60px; object-fit: contain;">
+                </div>
+                <div class="skill-content">
+                    <h3>Information Technology</h3>
+                    <p>Experienced in managing IT infrastructure, system administration, and technical support. I can help organizations leverage technology effectively, implement IT solutions, and maintain systems that support business operations and organizational objectives.</p>
+                </div>
+            </div>
+            
+            <!-- Data Engineering (Unchanged) -->
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <img src="./asset/data-science.png" alt="Data Engineering Icon"style="width: 60px; height: 60px; object-fit: contain;">
+                </div>
+                <div class="skill-content">
+                    <h3>Data Engineering</h3>
+                    <p>With my expertise in data warehousing, ETL (Extract, Transform, Load) processes, and cloud computing technologies, I can help you build a robust and scalable data infrastructure. Few technologies I work with - Airflow, Snowflake, dbt etc.</p>
+                </div>
+            </div>
+            
+            <!-- IAM (Changed from Visualization & Dashboards) -->
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <img src="./asset/id-card.png" alt="IAM Icon"style="width: 60px; height: 60px; object-fit: contain;">
+                </div>
+                <div class="skill-content">
+                    <h3>Identity & Access Management</h3>
+                    <p>Proficient in implementing and managing IAM solutions that ensure the right individuals access the right resources at the right times. I specialize in authentication protocols, single sign-on solutions, and designing least privilege access policies.</p>
+                </div>
+            </div>
+            
+            <!-- Networking (Changed from Statistical Analysis) -->
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <img src="./asset/networking.png" alt="Networking Icon"style="width: 60px; height: 60px; object-fit: contain;">
+                </div>
+                <div class="skill-content">
+                    <h3>Networking</h3>
+                    <p>Expert in designing, implementing, and troubleshooting network infrastructure. My experience covers LAN/WAN architectures, routing protocols, network security, and virtualized networking environments to ensure reliable and high-performance connectivity.</p>
+                </div>
+            </div>
+            
+            <!-- Application Troubleshooting (Changed from Data Mining) -->
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <img src="./asset/bug.png" alt="Application Troubleshooting Icon"style="width: 60px; height: 60px; object-fit: contain;">
+                </div>
+                <div class="skill-content">
+                    <h3>Application Troubleshooting</h3>
+                    <p>I excel at diagnosing and resolving complex application issues across various environments. Using systematic debugging approaches, log analysis, and performance monitoring, I can identify root causes and implement effective solutions to restore functionality.</p>
+                </div>
+            </div>
+            
+            <!-- IT Infrastructure Engineering (Unchanged) -->
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <img src="./asset/data-transfer (1).png" alt="=Infrastructure Icon" style="width: 60px; height: 60px; object-fit: contain;">
+                </div>
+                <div class="skill-content">
+                    <h3>IT Infrastructure Engineering</h3>
+                    <p>I design, implement, and maintain robust IT infrastructure solutions that support business operations. From network architecture to system integration, I ensure that your technology backbone is reliable, scalable, and secure.</p>
+                </div>
+            </div>
+            
+            <!-- Cloud Computing (Unchanged) -->
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <img src="./asset/server.png" alt="Cloud Computing Icon" style="width: 60px; height: 60px; object-fit: contain;">
+                </div>
+                <div class="skill-content">
+                    <h3>Cloud Computing</h3>
+                    <p>Expert in AWS, Azure, and GCP environments, I can architect and deploy cloud solutions that optimize performance, costs, and security. I specialize in containerization, serverless architectures, and cloud-native application development.</p>
+                </div>
+            </div>
+            
+            <!-- Monitoring (Unchanged) -->
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <img src="./asset/web-analytics.png" alt="Monitoring Icon"style="width: 60px; height: 60px; object-fit: contain;">
+                </div>
+                <div class="skill-content">
+                    <h3>Monitoring</h3>
+                    <p>I implement comprehensive monitoring solutions using tools like Prometheus, Grafana, and ELK stack to provide real-time visibility into system performance, application health, and infrastructure status, enabling proactive issue resolution.</p>
+                </div>
+            </div>
+            
+            <!-- Information Security (Unchanged) -->
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <img src="./asset/cyber-security.png" alt="Information Security Icon"style="width: 60px; height: 60px; object-fit: contain;">
+                </div>
+                <div class="skill-content">
+                    <h3>Information Security</h3>
+                    <p>With a focus on protecting sensitive data and systems, I design and implement security controls, conduct vulnerability assessments, and develop security policies to safeguard your organization against cyber threats.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- Companies/Brands Section -->
+    <section id="companies">
+        <div class="container">
+            <h2 class="section-title">Brands I've Worked With</h2>
+            <div class="marquee">
+                <div class="marquee-content">
+                    <div class="brand-logo"><img src="/api/placeholder/150/80" alt="Company 1"></div>
+                    <div class="brand-logo"><img src="/api/placeholder/150/80" alt="Company 2"></div>
+                    <div class="brand-logo"><img src="/api/placeholder/150/80" alt="Company 3"></div>
+                    <div class="brand-logo"><img src="/api/placeholder/150/80" alt="Company 4"></div>
+                    <div class="brand-logo"><img src="/api/placeholder/150/80" alt="Company 5"></div>
+                    <div class="brand-logo"><img src="/api/placeholder/150/80" alt="Company 6"></div>
+                    <!-- Duplicate logos for infinite scroll effect -->
+                    <div class="brand-logo"><img src="/api/placeholder/150/80" alt="Company 1"></div>
+                    <div class="brand-logo"><img src="/api/placeholder/150/80" alt="Company 2"></div>
+                    <div class="brand-logo"><img src="/api/placeholder/150/80" alt="Company 3"></div>
+                    <div class="brand-logo"><img src="/api/placeholder/150/80" alt="Company 4"></div>
+                    <div class="brand-logo"><img src="/api/placeholder/150/80" alt="Company 5"></div>
+                    <div class="brand-logo"><img src="/api/placeholder/150/80" alt="Company 6"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="/api/placeholder/400/300" alt="Project 1">
+                    </div>
+                    <div class="project-info">
+                        <h3>E-commerce Website</h3>
+                        <p>A responsive online store built with HTML, CSS, and JavaScript.</p>
+                        <div class="project-tags">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
+                        <a href="#" class="btn small-btn">View Project</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="/api/placeholder/400/300" alt="Project 2">
+                    </div>
+                    <div class="project-info">
+                        <h3>Travel App</h3>
+                        <p>A mobile-first application for travel enthusiasts with booking features.</p>
+                        <div class="project-tags">
+                            <span>React</span>
+                            <span>Node.js</span>
+                            <span>MongoDB</span>
+                        </div>
+                        <a href="#" class="btn small-btn">View Project</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="/api/placeholder/400/300" alt="Project 3">
+                    </div>
+                    <div class="project-info">
+                        <h3>Portfolio Redesign</h3>
+                        <p>A creative portfolio website for a professional photographer.</p>
+                        <div class="project-tags">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>jQuery</span>
+                        </div>
+                        <a href="#" class="btn small-btn">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-info">
+                <div class="footer-logo">Portfolio</div>
+                <p>Creating digital experiences that make a difference.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="mailto:your.email@example.com">your.email@example.com</a></li>
+                        <li><a href="tel:+1234567890">+1 (234) 567-890</a></li>
+                        <li>Your Location, City, Country</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <div class="container">
+                <p>&copy; 2025 Your Portfolio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

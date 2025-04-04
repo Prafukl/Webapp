@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login with Firebase</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 24px;
+            font-size: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #777;
+            user-select: none;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        button {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #3a7bc8;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .register-link a {
+            color: #4a90e2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .remember-me input {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        .remember-me label {
+            margin-bottom: 0;
+            font-weight: normal;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .forgot-password a {
+            color: #777;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+            color: #4a90e2;
+        }
+        
+        #loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #4a90e2;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .error-message {
+            background-color: #ffebee;
+            color: #e53935;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        
+        <div id="error-message" class="error-message"></div>
+        
+        <form id="login-form">
+            <!-- Email Field -->
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email">
+                <div class="error" id="email-error"></div>
+            </div>
+            
+            <!-- Password Field -->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-container">
+                    <input type="password" id="password" name="password" placeholder="Enter your password">
+                    <span class="password-toggle" id="password-toggle">👁️</span>
+                </div>
+                <div class="error" id="password-error"></div>
+            </div>
+            
+            <!-- Remember Me Checkbox -->
+            <div class="remember-me">
+                <input type="checkbox" id="remember-me" name="remember-me">
+                <label for="remember-me">Remember me</label>
+            </div>
+            
+            <!-- Forgot Password Link -->
+            <div class="forgot-password">
+                <a href="#" id="forgot-password-link">Forgot password?</a>
+            </div>
+            
+            <!-- Login Button -->
+            <button type="submit">Login</button>
+            
+            <!-- Register Link -->
+            <div class="register-link">
+                Don't have an account? <a href="./Reg.html">Register</a>
+            </div>
+            
+            <!-- Loading Spinner -->
+            <div id="loading">
+                <div class="spinner"></div>
+                <p>Logging in...</p>
+            </div>
+        </form>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+  apiKey: "AIzaSyC1CJjRnv34YyDMhtIsyB9RnEAlDNLgR7k",
+  authDomain: "prafull-web-application.firebaseapp.com",
+  projectId: "prafull-web-application",
+  storageBucket: "prafull-web-application.firebasestorage.app",
+  messagingSenderId: "535999421150",
+  appId: "1:535999421150:web:de9aafd9e87c22536f004f",
+  measurementId: "G-1LFZCZ9JB0"
+};
+        
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        
+        // Get Firebase services
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('login-form');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const emailError = document.getElementById('email-error');
+            const passwordError = document.getElementById('password-error');
+            const passwordToggle = document.getElementById('password-toggle');
+            const loadingElement = document.getElementById('loading');
+            const errorMessageElement = document.getElementById('error-message');
+            const forgotPasswordLink = document.getElementById('forgot-password-link');
+            const rememberMe = document.getElementById('remember-me');
+            
+            // Check if user is already logged in
+            auth.onAuthStateChanged(function(user) {
+                if (user) {
+                    // User is signed in, redirect to dashboard
+                    window.location.href = '/index.html';
+                }
+            });
+            
+            // Password visibility toggle
+            passwordToggle.addEventListener('click', function() {
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    passwordToggle.textContent = '🔒';
+                } else {
+                    passwordInput.type = 'password';
+                    passwordToggle.textContent = '👁️';
+                }
+            });
+            
+            // Form validation
+            function validateForm() {
+                let isValid = true;
+                
+                // Validate email
+                if (!emailInput.value.trim()) {
+                    emailError.textContent = 'Email is required';
+                    isValid = false;
+                } else {
+                    emailError.textContent = '';
+                }
+                
+                // Validate password
+                if (!passwordInput.value) {
+                    passwordError.textContent = 'Password is required';
+                    isValid = false;
+                } else {
+                    passwordError.textContent = '';
+                }
+                
+                return isValid;
+            }
+            
+            // Login form submission
+            loginForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Hide any existing error messages
+                errorMessageElement.style.display = 'none';
+                
+                if (validateForm()) {
+                    // Show loading spinner
+                    loadingElement.style.display = 'block';
+                    
+                    try {
+                        // Set persistence based on "Remember me" checkbox
+                        const persistence = rememberMe.checked 
+                            ? firebase.auth.Auth.Persistence.LOCAL 
+                            : firebase.auth.Auth.Persistence.SESSION;
+                        
+                        await auth.setPersistence(persistence);
+                        
+                        // Sign in with email and password
+                        const userCredential = await auth.signInWithEmailAndPassword(
+                            emailInput.value, 
+                            passwordInput.value
+                        );
+                        
+                        // Hide loading spinner
+                        loadingElement.style.display = 'none';
+                        
+                        // Check if email is verified
+                        if (!userCredential.user.emailVerified) {
+                            // Sign out the user
+                            await auth.signOut();
+                            
+                            // Show error message
+                            errorMessageElement.textContent = 'Please verify your email before logging in.';
+                            errorMessageElement.style.display = 'block';
+                            return;
+                        }
+                        
+                        // Redirect to dashboard on successful login
+                        window.location.href = '/index.html';
+                        
+                    } catch (error) {
+                        // Hide loading spinner
+                        loadingElement.style.display = 'none';
+                        
+                        console.error('Error during login:', error);
+                        
+                        // Handle specific Firebase Auth errors
+                        switch(error.code) {
+                            case 'auth/user-not-found':
+                            case 'auth/wrong-password':
+                                errorMessageElement.textContent = 'Invalid email or password';
+                                break;
+                            case 'auth/too-many-requests':
+                                errorMessageElement.textContent = 'Too many failed login attempts. Please try again later or reset your password';
+                                break;
+                            case 'auth/user-disabled':
+                                errorMessageElement.textContent = 'This account has been disabled';
+                                break;
+                            default:
+                                errorMessageElement.textContent = 'An error occurred during login. Please try again.';
+                        }
+                        
+                        errorMessageElement.style.display = 'block';
+                    }
+                }
+            });
+            
+            // Forgot password functionality
+            forgotPasswordLink.addEventListener('click', async function(e) {
+                e.preventDefault();
+                
+                const email = emailInput.value.trim();
+                
+                if (!email) {
+                    emailError.textContent = 'Please enter your email to reset your password';
+                    return;
+                }
+                
+                try {
+                    // Show loading spinner
+                    loadingElement.style.display = 'block';
+                    
+                    // Send password reset email
+                    await auth.sendPasswordResetEmail(email);
+                    
+                    // Hide loading spinner
+                    loadingElement.style.display = 'none';
+                    
+                    // Show success message
+                    alert(`Password reset email sent to ${email}. Please check your inbox.`);
+                    
+                } catch (error) {
+                    // Hide loading spinner
+                    loadingElement.style.display = 'none';
+                    
+                    console.error('Error sending password reset email:', error);
+                    
+                    if (error.code === 'auth/user-not-found') {
+                        emailError.textContent = 'No account found with this email';
+                    } else {
+                        emailError.textContent = 'Error sending reset email. Please try again.';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

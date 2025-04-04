@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration with Firebase</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 24px;
+            font-size: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+            font-size: 14px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #777;
+            user-select: none;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        button {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #3a7bc8;
+        }
+
+        .success-message {
+            text-align: center;
+            color: #555;
+            margin-top: 15px;
+        }
+
+        .success-heading {
+            color: #2ecc71;
+            margin-bottom: 15px;
+        }
+
+        input.error-border, select.error-border {
+            border-color: #e74c3c;
+        }
+
+        .form-group-optional label::after {
+            content: " (Optional)";
+            font-weight: normal;
+        }
+
+        .form-group-required label::after {
+            content: " *";
+            color: #e74c3c;
+        }
+        
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        
+        .login-link a {
+            color: #4a90e2;
+            text-decoration: none;
+        }
+        
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        
+        #loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #4a90e2;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="registration-container">
+        <h2>Registration Form</h2>
+        <form id="registration-form">
+            <!-- Name Field -->
+            <div class="form-group form-group-required">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name">
+                <div class="error" id="name-error"></div>
+            </div>
+            
+            <!-- Email Field -->
+            <div class="form-group form-group-required">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email">
+                <div class="error" id="email-error"></div>
+            </div>
+            
+            <!-- Password Field -->
+            <div class="form-group form-group-required">
+                <label for="password">Password</label>
+                <div class="password-container">
+                    <input type="password" id="password" name="password" placeholder="Enter your password">
+                    <span class="password-toggle" id="password-toggle">👁️</span>
+                </div>
+                <div class="error" id="password-error"></div>
+            </div>
+            
+            <!-- Confirm Password Field -->
+            <div class="form-group form-group-required">
+                <label for="confirm-password">Confirm Password</label>
+                <div class="password-container">
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password">
+                    <span class="password-toggle" id="confirm-password-toggle">👁️</span>
+                </div>
+                <div class="error" id="confirm-password-error"></div>
+            </div>
+            
+            <!-- Phone Field (Optional) -->
+            <div class="form-group form-group-optional">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+                <div class="error" id="phone-error"></div>
+            </div>
+            
+            <!-- Domain Dropdown -->
+            <div class="form-group form-group-required">
+                <label for="domain">Domain</label>
+                <select id="domain" name="domain">
+                    <option value="">Select your domain</option>
+                    <option value="IT Support">IT Support</option>
+                    <option value="Software Engineer">Software Engineer</option>
+                    <option value="Data Science">Data Science</option>
+                    <option value="Network Administration">Network Administration</option>
+                    <option value="Cybersecurity">Cybersecurity</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Mobile App Development">Mobile App Development</option>
+                    <option value="Cloud Computing">Cloud Computing</option>
+                    <option value="DevOps">DevOps</option>
+                    <option value="UI/UX Design">UI/UX Design</option>
+                </select>
+                <div class="error" id="domain-error"></div>
+            </div>
+            
+            <!-- Submit Button -->
+            <button type="submit">Register</button>
+            
+            <!-- Login Link -->
+            <div class="login-link">
+                Already have an account? <a href="login.html">Login</a>
+            </div>
+            
+            <!-- Loading Spinner -->
+            <div id="loading">
+                <div class="spinner"></div>
+                <p>Creating your account...</p>
+            </div>
+        </form>
+    </div>
+
+    <div class="container" id="success-container" style="display: none;">
+        <h2 class="success-heading">Registration Successful!</h2>
+        <p class="success-message" id="success-message">Your account has been created successfully.</p>
+        <button id="go-to-login">Go to Login</button>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Firebase configuration
+
+
+        const firebaseConfig = {
+  apiKey: "AIzaSyC1CJjRnv34YyDMhtIsyB9RnEAlDNLgR7k",
+  authDomain: "prafull-web-application.firebaseapp.com",
+  projectId: "prafull-web-application",
+  storageBucket: "prafull-web-application.firebasestorage.app",
+  messagingSenderId: "535999421150",
+  appId: "1:535999421150:web:de9aafd9e87c22536f004f",
+  measurementId: "G-1LFZCZ9JB0"
+};
+        
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        
+        // Get Firebase services
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const registrationForm = document.getElementById('registration-form');
+            const registrationContainer = document.getElementById('registration-container');
+            const successContainer = document.getElementById('success-container');
+            const goToLoginBtn = document.getElementById('go-to-login');
+            const loadingElement = document.getElementById('loading');
+            
+            // Password visibility toggle
+            const passwordToggle = document.getElementById('password-toggle');
+            const confirmPasswordToggle = document.getElementById('confirm-password-toggle');
+            const passwordField = document.getElementById('password');
+            const confirmPasswordField = document.getElementById('confirm-password');
+            
+            passwordToggle.addEventListener('click', function() {
+                togglePasswordVisibility(passwordField, passwordToggle);
+            });
+            
+            confirmPasswordToggle.addEventListener('click', function() {
+                togglePasswordVisibility(confirmPasswordField, confirmPasswordToggle);
+            });
+            
+            function togglePasswordVisibility(field, toggle) {
+                if (field.type === 'password') {
+                    field.type = 'text';
+                    toggle.textContent = '🔒';
+                } else {
+                    field.type = 'password';
+                    toggle.textContent = '👁️';
+                }
+            }
+            
+            // Form validation function
+            function validateForm() {
+                let isValid = true;
+                
+                // Validate name
+                const name = document.getElementById('name');
+                const nameError = document.getElementById('name-error');
+                if (!name.value.trim()) {
+                    nameError.textContent = 'Name is required';
+                    name.classList.add('error-border');
+                    isValid = false;
+                } else {
+                    nameError.textContent = '';
+                    name.classList.remove('error-border');
+                }
+                
+                // Validate email
+                const email = document.getElementById('email');
+                const emailError = document.getElementById('email-error');
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!email.value.trim()) {
+                    emailError.textContent = 'Email is required';
+                    email.classList.add('error-border');
+                    isValid = false;
+                } else if (!emailRegex.test(email.value)) {
+                    emailError.textContent = 'Invalid email format';
+                    email.classList.add('error-border');
+                    isValid = false;
+                } else {
+                    emailError.textContent = '';
+                    email.classList.remove('error-border');
+                }
+                
+                // Validate password
+                const password = document.getElementById('password');
+                const passwordError = document.getElementById('password-error');
+                if (!password.value) {
+                    passwordError.textContent = 'Password is required';
+                    password.classList.add('error-border');
+                    isValid = false;
+                } else if (password.value.length < 6) {
+                    passwordError.textContent = 'Password must be at least 6 characters';
+                    password.classList.add('error-border');
+                    isValid = false;
+                } else {
+                    passwordError.textContent = '';
+                    password.classList.remove('error-border');
+                }
+                
+                // Validate confirm password
+                const confirmPassword = document.getElementById('confirm-password');
+                const confirmPasswordError = document.getElementById('confirm-password-error');
+                if (!confirmPassword.value) {
+                    confirmPasswordError.textContent = 'Please confirm your password';
+                    confirmPassword.classList.add('error-border');
+                    isValid = false;
+                } else if (confirmPassword.value !== password.value) {
+                    confirmPasswordError.textContent = 'Passwords do not match';
+                    confirmPassword.classList.add('error-border');
+                    isValid = false;
+                } else {
+                    confirmPasswordError.textContent = '';
+                    confirmPassword.classList.remove('error-border');
+                }
+                
+                // Validate phone (optional)
+                const phone = document.getElementById('phone');
+                const phoneError = document.getElementById('phone-error');
+                if (phone.value && !/^\d{10}$/.test(phone.value)) {
+                    phoneError.textContent = 'Phone number should be 10 digits';
+                    phone.classList.add('error-border');
+                    isValid = false;
+                } else {
+                    phoneError.textContent = '';
+                    phone.classList.remove('error-border');
+                }
+                
+                // Validate domain
+                const domain = document.getElementById('domain');
+                const domainError = document.getElementById('domain-error');
+                if (!domain.value) {
+                    domainError.textContent = 'Please select a domain';
+                    domain.classList.add('error-border');
+                    isValid = false;
+                } else {
+                    domainError.textContent = '';
+                    domain.classList.remove('error-border');
+                }
+                
+                return isValid;
+            }
+            
+            // Form submission handler
+            registrationForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                if (validateForm()) {
+                    // Show loading spinner
+                    loadingElement.style.display = 'block';
+                    
+                    // Get form data
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
+                    const phone = document.getElementById('phone').value;
+                    const domain = document.getElementById('domain').value;
+                    
+                    try {
+                        // Create user with email and password
+                        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                        const user = userCredential.user;
+                        
+                        // Add user data to Firestore
+                        await db.collection('users').doc(user.uid).set({
+                            name: name,
+                            email: email,
+                            phone: phone || '',
+                            domain: domain,
+                            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                        });
+                        
+                        // Update user profile with display name
+                        await user.updateProfile({
+                            displayName: name
+                        });
+                        
+                        // Send email verification
+                        await user.sendEmailVerification();
+                        
+                        // Sign out the user (they need to verify email)
+                        await auth.signOut();
+                        
+                        // Hide loading spinner
+                        loadingElement.style.display = 'none';
+                        
+                        // Show success message
+                        document.getElementById('success-message').textContent = 
+                            `Your account has been created successfully. Please check your email at ${email} to verify your account.`;
+                        
+                        // Hide registration form, show success message
+                        registrationContainer.style.display = 'none';
+                        successContainer.style.display = 'block';
+                        
+                    } catch (error) {
+                        // Hide loading spinner
+                        loadingElement.style.display = 'none';
+                        
+                        console.error('Error during registration:', error);
+                        
+                        // Handle specific Firebase Auth errors
+                        if (error.code === 'auth/email-already-in-use') {
+                            const emailError = document.getElementById('email-error');
+                            emailError.textContent = 'This email is already registered';
+                            document.getElementById('email').classList.add('error-border');
+                        } else if (error.code === 'auth/weak-password') {
+                            const passwordError = document.getElementById('password-error');
+                            passwordError.textContent = 'Password is too weak';
+                            document.getElementById('password').classList.add('error-border');
+                        } else {
+                            alert('Error during registration: ' + error.message);
+                        }
+                    }
+                }
+            });
+            
+            // Go to login button handler
+            goToLoginBtn.addEventListener('click', function() {
+                window.location.href = 'login.html';
+            });
+        });
+    </script>
+</body>
+</html>
