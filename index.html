@@ -135,181 +135,308 @@
             color: #8e44ad;
         }
         
-        /* Skills section styles */
-        #skills {
-            background-color: #fff;
-            padding: 80px 0;
-        }
-        
-        .skills-subtitle {
-            text-align: center;
-            font-size: 1.2rem;
-            margin-top: -30px;
-            margin-bottom: 50px;
-            color: #666;
-            letter-spacing: 1px;
-        }
-        
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
-            gap: 30px;
-        }
-        
-        .skill-card {
-            display: flex;
-            background-color: #f9f9f9;
-            border-radius: 10px;
-            overflow: hidden;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .skill-icon {
-            margin-right: 20px;
-            flex-shrink: 0;
-        }
-        
-        .skill-content h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            color: #333;
-        }
-        
-        .skill-content p {
-            color: #666;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
+       /* IMPROVED SKILLS SECTION */
+#skills {
+    background-color: #f5f8fa;
+    padding: 80px 0;
+}
+
+.skills-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: -30px;
+    margin-bottom: 50px;
+    color: #666;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.skill-card {
+    display: flex;
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border: 1px solid #eaeaea;
+    height: 100%;
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+    border-color: #d0d0d0;
+}
+
+.skill-icon {
+    margin-right: 20px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 70px;
+}
+
+.skill-img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.skill-content {
+    flex: 1;
+}
+
+.skill-content h3 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    color: #333;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.skill-content h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 3px;
+    background-color: #8e44ad;
+}
+
+.skill-content p {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Responsive styles for skills section */
+@media screen and (max-width: 1200px) {
+    .skills-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .skill-card {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .skill-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 25px 20px;
+    }
+    
+    .skill-icon {
+        margin: 0 auto 15px;
+        width: auto;
+    }
+    
+    .skill-content h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .skill-content h3 {
+        padding-bottom: 15px;
+    }
+}
         
         /* Timeline styles for Education and Experience sections */
-        #education, #experience {
-            background-color: #f9f9f9;
-            padding: 80px 0;
-        }
-        
-        .timeline {
-            position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 6px;
-            background-color: #09c;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -3px;
-            border-radius: 3px;
-        }
-        
-        .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            width: 50%;
-            left: 0;
-            margin-bottom: 30px;
-        }
-        
-        .timeline-item:nth-child(even) {
-            left: 50%;
-        }
-        
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            right: -10px;
-            background-color: white;
-            border: 4px solid #09c;
-            top: 20px;
-            border-radius: 50%;
-            z-index: 1;
-        }
-        
-        .timeline-item:nth-child(even)::after {
-            left: -10px;
-        }
-        
-        .timeline-content {
-            padding: 20px;
-            background-color: white;
-            position: relative;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .timeline-content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        .timeline-content h3 {
-            font-size: 1.3rem;
-            margin-bottom: 5px;
-            color: #333;
-        }
-        
-        .timeline-content h4 {
-            font-size: 1.1rem;
-            color: #09c;
-            margin-bottom: 10px;
-        }
-        
-        .timeline-date {
-            font-size: 0.9rem;
-            color: #777;
-            font-style: italic;
-            display: block;
-            margin-bottom: 10px;
-        }
-        
-        .timeline-content p {
-            margin-top: 15px;
-            color: #666;
-        }
-        
-        @media screen and (max-width: 768px) {
-            .timeline::after {
-                left: 31px;
-            }
-            
-            .timeline-item {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
-                left: 0 !important;
-            }
-            
-            .timeline-item::after {
-                left: 21px;
-                right: auto;
-            }
-        }
+        /* Timeline styles for Experience sections - keep this if you still want timeline for experience */
+#experience {
+    background-color: #f9f9f9;
+    padding: 80px 0;
+}
 
-        .burger {
-            display: none;
-            cursor: pointer;
-        }
+/* NEW EDUCATION SECTION STYLES - replace timeline for education */
+#education {
+    background-color: #f9f9f9;
+    padding: 80px 0;
+}
 
-        .burger div {
-            width: 25px;
-            height: 3px;
-            background-color: white;
-            margin: 5px;
-            transition: all 0.3s ease;
-        }
+.education-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.education-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+    width: calc(50% - 15px);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.education-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.education-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.education-card h4 {
+    font-size: 1.1rem;
+    color: #09c;
+    margin-bottom: 10px;
+}
+
+.education-date {
+    font-size: 0.9rem;
+    color: #777;
+    font-style: italic;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.education-card ul {
+    padding-left: 20px;
+    margin-top: 15px;
+}
+
+.education-card li {
+    margin-bottom: 5px;
+    color: #666;
+}
+
+/* Keep the timeline styles for experience if you want */
+.timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Rest of timeline styles remain the same for experience section */
+/* ... */
+
+/* Media queries for education cards */
+@media screen and (max-width: 768px) {
+    .education-card {
+        width: 100%;
+    }
+    
+    /* Keep timeline responsive styles for experience section */
+    .timeline::after {
+        left: 31px;
+    }
+    
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+        left: 0 !important;
+    }
+    
+    .timeline-item::after {
+        left: 21px;
+        right: auto;
+    }
+}
+/* IMPROVED EXPERIENCE SECTION */
+#experience {
+    background-color: #fff;
+    padding: 80px 0;
+}
+
+.experience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.experience-card {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    padding: 25px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.experience-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.experience-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background-color: #8e44ad;
+}
+
+.experience-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.experience-card h4 {
+    font-size: 1rem;
+    color: #09c;
+    margin-bottom: 8px;
+}
+
+.experience-date {
+    font-size: 0.9rem;
+    color: #777;
+    font-style: italic;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.experience-card ul {
+    padding-left: 18px;
+    margin-top: 10px;
+}
+
+.experience-card li {
+    margin-bottom: 5px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Add this to your responsive styles */
+@media screen and (max-width: 768px) {
+    .experience-grid {
+        grid-template-columns: 1fr;
+    }
+}
 
         /* Hero Section */
         .hero {
@@ -667,6 +794,13 @@
         </div>
     </header>
 
+
+
+
+
+
+
+
     <script>
         // JavaScript for toggle menu
         const burger = document.querySelector('.burger');
@@ -696,255 +830,188 @@
     </section>
 
     <!-- Education Section -->
-    <section id="education">
-        <div class="container">
-            <h2 class="section-title">Education</h2>
+    <!-- IMPROVED EDUCATION SECTION -->
+<section id="education">
+    <div class="container">
+        <h2 class="section-title">Education</h2>
         
-                
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>Bachelor in Computer Application</h3>
-                        <h4>Pune University</h4>
-                        <h4><a href="https://en.wikipedia.org/wiki/Savitribai_Phule_Pune_University">76 Years of Education History</a></h4>
-                        <h4><a href="http://www.unipune.ac.in/">Visit where I studied</a> </h4>
-                        <span class="timeline-date">(2015-2019)</span>
-                        <p>Comprehensive education in Computer science fundamentals, Programming languages, Database management,Networking, web technologies, Cloud , Data Structures
-                            Algorithms </p>
-                        <p> Course Subjects Taken</p>
-                        <p>     
-                                <li>Data Structures </li>
-                                <li>Algorithms</li>
-                                <li>Computer Programming</li>
-                                <li>Computer Architecture</li>
-                                <li>Discrete Mathematics</li>
-                                <li>Software Engineering</li>
-                                <li>Operating Systems</li>
-                                <li>Computer Networks</li>
-                                <li>Database Management Systems</li>
-                                <li>Web Technologies</li>
-                                <li>Cloud Computing</li>
-                                <li>Data Mining </li>
-                                <li>Data Warehousing</li>
-                                <li>Operating Systems</li>
-                                 <li>Cloud Computing </li>
-                                <li>Cyber Security</li>
-
-                            
-  
-                             </p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>Master in  Computer Science & Engineering & Application</h3>
-                        <h4>Bharati Vidyapeeth University Pune </h4>
-                        <h4><a href="https://www.bvuniversity.edu.in/">Visit Where I have studied </a></h4>
-                        <span class="timeline-date">(2021-2023)</span>
-                        <p>Strong foundation in computer science principles, software engineering methodologies, and technology infrastructure management , Agile methodologies </p>
-                        <p> Course Subjects Taken</p>
-                        <p>     
-                                <li>Data Structures </li>
-                                <li>Algorithms</li>
-                                <li>Computer Programming</li>
-                                <li>Computer Architecture</li>
-                                <li>Applied Mathematics</li>
-                                <li>Software Engineering</li>
-                                <li> Advance Operating Systems</li>
-                                <li>Computer Networks / Firewall, Switchs</li>
-                                <li>Database Management Systems</li>
-                                <li>Web Technologies</li>
-                                <li>Cloud Computing</li>
-                                <li>Machine Learning </li>
-                                 <li>Cloud Computing </li>
-                                <li>Cyber Security</li>
-                                <li>Information Security</li>
-                                <li>IAM </li>
-                                <li>Data Engineering</li>
-
-                             </p>
-                    
-                    </div>
-
-                </div>
+        <div class="education-container">
+            <!-- Bachelor Degree Card -->
+            <div class="education-card">
+                <h3>Bachelor in Computer Application</h3>
+                <h4>Pune University</h4>
+                <h4><a href="https://en.wikipedia.org/wiki/Savitribai_Phule_Pune_University">76 Years of Education History</a></h4>
+                <h4><a href="http://www.unipune.ac.in/">Visit where I studied</a></h4>
+                <span class="education-date">(2015-2019)</span>
+                <p>Comprehensive education in Computer science fundamentals, Programming languages, Database management, Networking, web technologies, Cloud, Data Structures, and Algorithms.</p>
+                <p><strong>Course Subjects:</strong></p>
+                <ul>
+                    <li>Data Structures & Algorithms</li>
+                    <li>Computer Programming</li>
+                    <li>Computer Architecture</li>
+                    <li>Discrete Mathematics</li>
+                    <li>Software Engineering</li>
+                    <li>Operating Systems</li>
+                    <li>Computer Networks</li>
+                    <li>Database Management Systems</li>
+                    <li>Web Technologies</li>
+                    <li>Cloud Computing</li>
+                    <li>Cyber Security</li>
+                </ul>
+            </div>
+            
+            <!-- Master Degree Card -->
+            <div class="education-card">
+                <h3>Master in Computer Science & Engineering & Application</h3>
+                <h4>Bharati Vidyapeeth University Pune</h4>
+                <h4><a href="https://www.bvuniversity.edu.in/">Visit Where I have studied</a></h4>
+                <span class="education-date">(2021-2023)</span>
+                <p>Strong foundation in computer science principles, software engineering methodologies, and technology infrastructure management, Agile methodologies.</p>
+                <p><strong>Course Subjects:</strong></p>
+                <ul>
+                    <li>Advanced Operating Systems</li>
+                    <li>Computer Networks / Firewall, Switches</li>
+                    <li>Database Management Systems</li>
+                    <li>Web Technologies</li>
+                    <li>Cloud Computing</li>
+                    <li>Machine Learning</li>
+                    <li>Cyber Security</li>
+                    <li>Information Security</li>
+                    <li>Identity & Access Management</li>
+                    <li>Data Engineering</li>
+                </ul>
             </div>
         </div>
-    </section>
-    
+    </div>
+</section>
     <!-- Experience Section -->
-    <section id="experience">
-        <div class="container">
-            <h2 class="section-title">Experience 5 + </h2>
+    <!-- IMPROVED EXPERIENCE SECTION -->
+<section id="experience">
+    <div class="container">
+        <h2 class="section-title">Experience 5+</h2>
+        
+        <div class="experience-grid">
+            <!-- Experience 1 -->
+            <div class="experience-card">
+                <h3>IT Infrastructure</h3>
+                <h4><a href="https://smartrent.com/">SmartRent</a></h4>
+                <h4>Company Service Type - Product</h4>
+                <span class="experience-date">(10.2024 - Present)</span>
+                <ul>
+                    <li>Infrastructure Engineer | Reported to Chief Technology(CTO)Office</li>
+                    <li>Solely hired as the only Infrastructure Engineer for India, responsible for scaling infrastructure from 0 to 40%.</li>
+                </ul>
+            </div>
             
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>IT Infrastructure</h3>
-                        <h4> <a href="https://smartrent.com/">SmartRent</a></h4>
-
-                        <h4> <a href="https://smartrent.com/">Company Service Type - Product</a></h4>
-                        <span class="timeline-date">(10.2024 - Present)</span>
-                        <p><li>Infrastructure Engineer | Reported to Chief Technology(CTO)Office</li></p>
-                        <p><li>Solely hired as the only Infrastructure Engineer for India, responsible for scaling infrastructure from 0 to 40%.</li></p>
-                        </p>
-
-
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>Founding Member and CEO</h3>
-                        <h4><a href="https://www.systemconsultant.io/">Systems Consultant Tech </a></h4>
-                        <h4><a href="https://www.systemconsultant.io/">Company Service Type - Product & Service </a></h4>
-                    
-                        <h4><a href="https://www.systemconsultant.io/">Read my Startup Story 👈 </a></h4>
-                        <span class="timeline-date">(05/2024 - 08/2025)</span>
-                        <p> <li>Provided technical consulting services for enterprise systems</li> 
-                            <li>Focusing on data integration</li> 
-                            <li>system optimization, and technology implementation.</li></p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>Service Desk Engineering</h3>
-                        <h4><a href="https://www.compucom.com/">CompuCom  </a></h4>
-                        <h4><a href="https://www.compucom.com/">Company Service Type - Product & Service </a></h4>
-                        <span class="timeline-date">(11/2021 - 04/2024)</span>
-                        <p><li>Transformative IT Solutions to Unlock Business Potential</li></p>
-                    </div>
-                </div>
-                
+            <!-- Experience 2 -->
+            <div class="experience-card">
+                <h3>Founding Member and CEO</h3>
+                <h4><a href="https://www.systemconsultant.io/">Systems Consultant Tech</a></h4>
+                <h4>Company Service Type - Product & Service</h4>
+                <span class="experience-date">(05/2024 - 08/2025)</span>
+                <ul>
+                    <li>Provided technical consulting services for enterprise systems</li>
+                    <li>Focusing on data integration</li>
+                    <li>System optimization, and technology implementation.</li>
+                </ul>
+            </div>
             
-                
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>Analyst</h3>
-                        <h4><a href="https://eclerx.com/">eclerx  </a></h4>
-                        <h4><a href="https://eclerx.com/">Company Service Type - Financial technology </a></h4>
-                        <span class="timeline-date">(05/2019 - 07/2019)</span>
-                        <p><li>Financial technology that uses cutting-edge innovations in applications, services, and processes to expand, enhance, automate, and scale the delivery of financial products and services</li></p>
-                    </div>
-                </div>
+            <!-- Experience 3 -->
+            <div class="experience-card">
+                <h3>Service Desk Engineering</h3>
+                <h4><a href="https://www.compucom.com/">CompuCom</a></h4>
+                <h4>Company Service Type - Product & Service</h4>
+                <span class="experience-date">(11/2021 - 04/2024)</span>
+                <ul>
+                    <li>Transformative IT Solutions to Unlock Business Potential</li>
+                </ul>
+            </div>
+            
+            <!-- Experience 4 -->
+            <div class="experience-card">
+                <h3>Analyst</h3>
+                <h4><a href="https://eclerx.com/">eclerx</a></h4>
+                <h4>Company Service Type - Financial technology</h4>
+                <span class="experience-date">(05/2019 - 07/2019)</span>
+                <ul>
+                    <li>Financial technology that uses cutting-edge innovations in applications, services, and processes to expand, enhance, automate, and scale the delivery of financial products and services</li>
+                </ul>
             </div>
         </div>
-    </section>
+    </div>
+</section>
     
    <!-- Skills Section -->
+<!-- IMPROVED SKILLS SECTION -->
 <section id="skills">
     <div class="container">
         <h2 class="section-title">Skills</h2>
         <h3 class="skills-subtitle">PROFESSIONAL DATA-BENDER!</h3>
         
         <div class="skills-grid">
-            <!-- Software Engineering (Changed from Machine Learning) -->
+            <!-- Software Engineering -->
             <div class="skill-card">
                 <div class="skill-icon">
-                    <img src="./asset/laptop.png" alt="Software Engineering Icon"style="width: 60px; height: 60px; object-fit: contain;">
+                    <img src="./asset/laptop.png" alt="Software Engineering Icon" class="skill-img">
                 </div>
                 <div class="skill-content">
                     <h3>Software Engineering</h3>
-                    <p>I can design and develop robust software solutions using best practices and modern development methodologies. My expertise includes full-stack development, microservices architecture, and writing clean, maintainable code across multiple programming languages.</p>
+                    <p>I can design and develop robust software solutions using best practices and modern development methodologies. My expertise includes full-stack development, microservices architecture, and writing clean, maintainable code.</p>
                 </div>
             </div>
             
-            <!-- Information Technology (Changed from Data Analysis) -->
+            <!-- Information Technology -->
             <div class="skill-card">
                 <div class="skill-icon">
-                    <img src="./asset/information-technology.png" alt="Information Technology Icon"style="width: 60px; height: 60px; object-fit: contain;">
+                    <img src="./asset/information-technology.png" alt="Information Technology Icon" class="skill-img">
                 </div>
                 <div class="skill-content">
                     <h3>Information Technology</h3>
-                    <p>Experienced in managing IT infrastructure, system administration, and technical support. I can help organizations leverage technology effectively, implement IT solutions, and maintain systems that support business operations and organizational objectives.</p>
+                    <p>Experienced in managing IT infrastructure, system administration, and technical support. I can help organizations leverage technology effectively, implement IT solutions, and maintain systems that support business operations.</p>
                 </div>
             </div>
             
-            <!-- Data Engineering (Unchanged) -->
+            <!-- Data Engineering -->
             <div class="skill-card">
                 <div class="skill-icon">
-                    <img src="./asset/data-science.png" alt="Data Engineering Icon"style="width: 60px; height: 60px; object-fit: contain;">
+                    <img src="./asset/data-science.png" alt="Data Engineering Icon" class="skill-img">
                 </div>
                 <div class="skill-content">
                     <h3>Data Engineering</h3>
-                    <p>With my expertise in data warehousing, ETL (Extract, Transform, Load) processes, and cloud computing technologies, I can help you build a robust and scalable data infrastructure. Few technologies I work with - Airflow, Snowflake, dbt etc.</p>
+                    <p>With my expertise in data warehousing, ETL processes, and cloud computing technologies, I can help you build a robust and scalable data infrastructure. Few technologies I work with - Airflow, Snowflake, dbt etc.</p>
                 </div>
             </div>
             
-            <!-- IAM (Changed from Visualization & Dashboards) -->
+            <!-- IAM -->
             <div class="skill-card">
                 <div class="skill-icon">
-                    <img src="./asset/id-card.png" alt="IAM Icon"style="width: 60px; height: 60px; object-fit: contain;">
+                    <img src="./asset/id-card.png" alt="IAM Icon" class="skill-img">
                 </div>
                 <div class="skill-content">
                     <h3>Identity & Access Management</h3>
-                    <p>Proficient in implementing and managing IAM solutions that ensure the right individuals access the right resources at the right times. I specialize in authentication protocols, single sign-on solutions, and designing least privilege access policies.</p>
+                    <p>Proficient in implementing and managing IAM solutions that ensure the right individuals access the right resources at the right times. I specialize in authentication protocols and designing least privilege access policies.</p>
                 </div>
             </div>
             
-            <!-- Networking (Changed from Statistical Analysis) -->
+            <!-- Networking -->
             <div class="skill-card">
                 <div class="skill-icon">
-                    <img src="./asset/networking.png" alt="Networking Icon"style="width: 60px; height: 60px; object-fit: contain;">
+                    <img src="./asset/networking.png" alt="Networking Icon" class="skill-img">
                 </div>
                 <div class="skill-content">
                     <h3>Networking</h3>
-                    <p>Expert in designing, implementing, and troubleshooting network infrastructure. My experience covers LAN/WAN architectures, routing protocols, network security, and virtualized networking environments to ensure reliable and high-performance connectivity.</p>
+                    <p>Expert in designing, implementing, and troubleshooting network infrastructure. My experience covers LAN/WAN architectures, routing protocols, network security, and virtualized networking environments.</p>
                 </div>
             </div>
             
-            <!-- Application Troubleshooting (Changed from Data Mining) -->
+            <!-- Application Troubleshooting -->
             <div class="skill-card">
                 <div class="skill-icon">
-                    <img src="./asset/bug.png" alt="Application Troubleshooting Icon"style="width: 60px; height: 60px; object-fit: contain;">
+                    <img src="./asset/bug.png" alt="Application Troubleshooting Icon" class="skill-img">
                 </div>
                 <div class="skill-content">
                     <h3>Application Troubleshooting</h3>
-                    <p>I excel at diagnosing and resolving complex application issues across various environments. Using systematic debugging approaches, log analysis, and performance monitoring, I can identify root causes and implement effective solutions to restore functionality.</p>
-                </div>
-            </div>
-            
-            <!-- IT Infrastructure Engineering (Unchanged) -->
-            <div class="skill-card">
-                <div class="skill-icon">
-                    <img src="./asset/data-transfer (1).png" alt="=Infrastructure Icon" style="width: 60px; height: 60px; object-fit: contain;">
-                </div>
-                <div class="skill-content">
-                    <h3>IT Infrastructure Engineering</h3>
-                    <p>I design, implement, and maintain robust IT infrastructure solutions that support business operations. From network architecture to system integration, I ensure that your technology backbone is reliable, scalable, and secure.</p>
-                </div>
-            </div>
-            
-            <!-- Cloud Computing (Unchanged) -->
-            <div class="skill-card">
-                <div class="skill-icon">
-                    <img src="./asset/server.png" alt="Cloud Computing Icon" style="width: 60px; height: 60px; object-fit: contain;">
-                </div>
-                <div class="skill-content">
-                    <h3>Cloud Computing</h3>
-                    <p>Expert in AWS, Azure, and GCP environments, I can architect and deploy cloud solutions that optimize performance, costs, and security. I specialize in containerization, serverless architectures, and cloud-native application development.</p>
-                </div>
-            </div>
-            
-            <!-- Monitoring (Unchanged) -->
-            <div class="skill-card">
-                <div class="skill-icon">
-                    <img src="./asset/web-analytics.png" alt="Monitoring Icon"style="width: 60px; height: 60px; object-fit: contain;">
-                </div>
-                <div class="skill-content">
-                    <h3>Monitoring</h3>
-                    <p>I implement comprehensive monitoring solutions using tools like Prometheus, Grafana, and ELK stack to provide real-time visibility into system performance, application health, and infrastructure status, enabling proactive issue resolution.</p>
-                </div>
-            </div>
-            
-            <!-- Information Security (Unchanged) -->
-            <div class="skill-card">
-                <div class="skill-icon">
-                    <img src="./asset/cyber-security.png" alt="Information Security Icon"style="width: 60px; height: 60px; object-fit: contain;">
-                </div>
-                <div class="skill-content">
-                    <h3>Information Security</h3>
-                    <p>With a focus on protecting sensitive data and systems, I design and implement security controls, conduct vulnerability assessments, and develop security policies to safeguard your organization against cyber threats.</p>
+                    <p>I excel at diagnosing and resolving complex application issues across various environments. Using systematic debugging approaches, log analysis, and performance monitoring to identify root causes.</p>
                 </div>
             </div>
         </div>
