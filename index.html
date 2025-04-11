@@ -920,7 +920,67 @@
             }
         }
 
-
+        @media screen and (max-width: 768px) {
+            .burger {
+                display: block;
+                z-index: 102;
+                position: relative;
+            }
+            
+            .nav-links {
+                position: fixed;
+                right: 0;
+                height: 100vh;
+                top: 0;
+                background-color: #1e1e2f;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 70%;
+                transform: translateX(100%);
+                transition: transform 0.3s ease-out;
+                padding: 80px 0;
+                z-index: 101;
+                box-shadow: -5px 0px 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+                opacity: 0;
+                transform: translateX(20px);
+                transition: all 0.4s ease;
+                transition-delay: calc(0.1s * var(--i, 0));
+            }
+            
+            .nav-active {
+                transform: translateX(0%);
+            }
+            
+            .nav-active li {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            
+            /* Add overlay when menu is active */
+            .nav-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 100;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+            }
+            
+            .nav-overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
 
     </style>
 <header>
@@ -928,15 +988,13 @@
         <nav>
             <div class="logo">Techcommunityconnect</div>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#experience">Experience</a></li>
-                
-                <li><a href="#technology">Technology</a></li>
-                <li><a href="#projects">Projects</a></li>
-            
-                <li><a href="https://www.systemconsultant.io/Subpag/Startup_story.html">Startup Story </a></li>
-                <li><a href="./Loginpage/login.html">Login</a></li>
+                <li style="--i:1"><a href="#home">Home</a></li>
+                <li style="--i:2"><a href="#education">Education</a></li>
+                <li style="--i:3"><a href="#experience">Experience</a></li>
+                <li style="--i:4"><a href="#technology">Technology</a></li>
+                <li style="--i:5"><a href="#projects">Projects</a></li>
+                <li style="--i:6"><a href="https://www.systemconsultant.io/Subpag/Startup_story.html">Startup Story</a></li>
+                <li style="--i:7"><a href="./Loginpage/login.html">Login</a></li>
             </ul>
             <div class="burger">
                 <div class="line1"></div>
@@ -945,28 +1003,66 @@
             </div>
         </nav>
     </div>
-
+    <div class="nav-overlay"></div>
 </header>
 
 
 
 
 <script>
-    // Simple mobile menu toggle
-    const burger = document.querySelector('.burger');
-    const navLinks = document.querySelector('.nav-links');
-    
-    burger.addEventListener('click', function() {
-        navLinks.classList.toggle('nav-active');
-        this.classList.toggle('toggle');
-    });
-    
-    // Close menu when clicking on links
-    const menuLinks = document.querySelectorAll('.nav-links li a');
-    menuLinks.forEach(link => {
-        link.addEventListener('click', function() {
+    document.addEventListener('DOMContentLoaded', function() {
+        const burger = document.querySelector('.burger');
+        const navLinks = document.querySelector('.nav-links');
+        const navOverlay = document.querySelector('.nav-overlay');
+        const body = document.body;
+        
+        // Toggle menu when burger is clicked
+        burger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            navLinks.classList.toggle('nav-active');
+            this.classList.toggle('toggle');
+            navOverlay.classList.toggle('active');
+            
+            // Toggle body scroll lock
+            if (navLinks.classList.contains('nav-active')) {
+                body.style.overflow = 'hidden';
+            } else {
+                body.style.overflow = '';
+            }
+        });
+        
+        // Close menu when clicking on links
+        const menuLinks = document.querySelectorAll('.nav-links li a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.classList.remove('nav-active');
+                burger.classList.remove('toggle');
+                navOverlay.classList.remove('active');
+                body.style.overflow = '';
+            });
+        });
+        
+        // Close menu when clicking overlay
+        navOverlay.addEventListener('click', function() {
             navLinks.classList.remove('nav-active');
             burger.classList.remove('toggle');
+            navOverlay.classList.remove('active');
+            body.style.overflow = '';
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768 && navLinks.classList.contains('nav-active')) {
+                navLinks.classList.remove('nav-active');
+                burger.classList.remove('toggle');
+                navOverlay.classList.remove('active');
+                body.style.overflow = '';
+            }
+        });
+        
+        // Prevent clicks inside the menu from closing it
+        navLinks.addEventListener('click', function(e) {
+            e.stopPropagation();
         });
     });
 </script>
