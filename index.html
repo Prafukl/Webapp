@@ -870,6 +870,84 @@
                 margin: 0 auto 30px;
             }
         }
+        
+        /* Banner Styles */
+        .community-banner {
+            background: linear-gradient(to right, #8B5CF6, #3B82F6, #10B981);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .banner-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .banner-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .banner-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+        
+        .banner-text {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .banner-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            background-color: white;
+            color: #8B5CF6;
+            border: none;
+            border-radius: 6px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            min-width: 200px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .banner-btn:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+        
+        @media screen and (max-width: 768px) {
+            .banner-title {
+                font-size: 2rem;
+            }
+            
+            .banner-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .banner-text {
+                font-size: 1rem;
+            }
+            
+            .community-banner {
+                padding: 40px 15px;
+            }
+            
+            .banner-btn {
+                padding: 12px 25px;
+                font-size: 1.1rem;
+            }
+        }
 
         @media screen and (max-width: 768px) {
             .burger {
@@ -1085,6 +1163,20 @@
             </div>
         </div>
     </section>
+
+    <!-- Banner -->
+    <div class="community-banner">
+        <div class="banner-container">
+            <div class="banner-content">
+                <h1 class="banner-title">Tech Community Connect</h1>
+                <p class="banner-subtitle">India's Premier Platform for Tech Professionals</p>
+                <p class="banner-text">Join our community of developers, engineers, and tech enthusiasts. Share knowledge, learn, and grow together.</p>
+                <div>
+                    <button class="banner-btn"><a href="./Loginpage/login.html">Join Community</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Education Section -->
     <!-- IMPROVED EDUCATION SECTION -->
